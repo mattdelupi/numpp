@@ -1,9 +1,12 @@
 #include <iostream>
 #include <cmath>
 #include "nppCmplx.h"
+#include "nppVctr.h"
 
 int main()
 {
+  std::cout << "----- npp::Cmplx class demonstration: -----\n";
+
   npp::Cmplx a;
   npp::Cmplx b(-1.0, 2.0);
   npp::Cmplx c(2.5);
@@ -17,7 +20,7 @@ int main()
   auto i = npp::Cmplx::one();
 
   npp::Cmplx j = e;
-  npp::Cmplx k; k = -2.3;
+  npp::Cmplx k = -2.3;
 
   npp::Cmplx l = e.conj();
 
@@ -48,6 +51,8 @@ int main()
 
   n.print(); n.printPolar();
   o.print(); o.printPolar();
+
+  std::cout << "----- npp::Vctr class demonstration: -----\n";
 
   return 0;
 }

@@ -6,6 +6,10 @@
 #include <type_traits>
 #include <initializer_list>
 #include <stdexcept>
+#include <utility>
+#include <algorithm>
+#include <functional>
+#include <numeric>
 
 namespace npp
 {
@@ -24,24 +28,26 @@ namespace npp
     std::vector<T> m_data;
     bool m_isColumn;
 
-  private:
-    void checkBounds(const SizeType) const;
-    void checkSizeCompatibility(const Vctr &) const;
-
   public:
     Vctr();
     explicit Vctr(const SizeType);
-    explicit (const SizeType, const T &);
-    Vctr(std::initializer_list<T>)
+    explicit Vctr(const SizeType, const T &);
+    Vctr(std::initializer_list<T>);
     Vctr(const Vctr &);
-    Vctr(const Vctr &&) noexcept;
+    Vctr(Vctr &&) noexcept;
     ~Vctr();
 
     template <class Iter>
     Vctr(Iter, Iter);
 
+  private:
+    void checkBounds(const SizeType) const;
+    void checkSizeCompatibility(const Vctr &) const;
+
+  public:
     Vctr &operator=(const Vctr &);
-    Vctr &operator=(const Vctr &&) noexcept;
+    Vctr &operator=(Vctr &&) noexcept;
+    void fill(const T &);
 
     T &at(const SizeType);
     const T &at(const SizeType) const;
@@ -56,8 +62,8 @@ namespace npp
     const T &back() const;
 
     SizeType size() const noexcept;
-    bool empty() const noexcept;
-    void reserve(SizeType);
+    bool isEmpty() const noexcept;
+    void reserve(const SizeType);
     SizeType capacity() const noexcept;
 
     void pushBack(const T &);
@@ -92,33 +98,45 @@ namespace npp
     const Vctr &operator+() const;
     Vctr operator+(const Vctr &) const;
     Vctr operator+(const T &) const;
-    friend Vctr operator+(const T &, const Vctr &);
+
+    template <class U>
+    friend Vctr<U> operator+(const U &, const Vctr<U> &);
 
     Vctr operator-() const;
     Vctr operator-(const Vctr &) const;
     Vctr operator-(const T &) const;
-    friend Vctr operator-(const T &, const Vctr &);
+
+    template <class U>
+    friend Vctr<U> operator-(const U &, const Vctr<U> &);
 
     Vctr operator*(const Vctr &) const;
     Vctr operator*(const T &) const;
-    friend Vctr operator*(const T &, const Vctr &);
+
+    template <class U>
+    friend Vctr<U> operator*(const U &, const Vctr<U> &);
 
     Vctr operator/(const Vctr &) const;
     Vctr operator/(const T &) const;
-    friend Vctr operator/(const T &, const Vctr &);
+
+    template <class U>
+    friend Vctr<U> operator/(const U &, const Vctr<U> &);
 
     bool operator==(const Vctr &) const;
     bool operator==(const T &) const;
-    friend bool operator==(const T &, const Vctr &);
+
+    template <class U>
+    friend bool operator==(const U &, const Vctr<U> &);
 
     bool operator!=(const Vctr &) const;
     bool operator!=(const T &) const;
-    friend bool operator!=(const T &, const Vctr &);
+
+    template <class U>
+    friend bool operator!=(const U &, const Vctr<U> &);
 
     T dot(const Vctr &) const;
 
-    T norm() const;
     T squaredNorm() const;
+    T norm() const;
 
     Vctr &normalize();
     Vctr normalized() const;
@@ -127,12 +145,12 @@ namespace npp
     T min() const;
     T max() const;
 
-    void fill(const T &);
-
     template <class UnaryFunc>
     Vctr &apply(UnaryFunc);
 
     template <class UnaryFunc>
     Vctr map(UnaryFunc) const;
+
+    bool isColumn() const;
   };
 }

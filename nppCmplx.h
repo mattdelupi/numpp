@@ -13,7 +13,7 @@ namespace npp
 
   public:
     Cmplx();
-    explicit Cmplx(const double);
+    Cmplx(const double);
     explicit Cmplx(const double, const double);
     Cmplx(const Cmplx &);
 
