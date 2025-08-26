@@ -416,9 +416,7 @@ bool npp::Vctr<T>::operator==(const npp::Vctr<T> &other) const
 template <class T>
 bool npp::Vctr<T>::operator==(const T &other) const
 {
-  return
-    std::adjacent_find(begin(), end(), std::not_equal_to<T>())
-    && operator[](0) == other;
+  return std::find(begin(), end(), other) == end();
 }
 
 template <class T>
