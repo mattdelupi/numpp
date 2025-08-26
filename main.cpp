@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cmath>
 #include "nppCmplx.h"
 #include "nppVctr.h"
 

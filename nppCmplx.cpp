@@ -148,6 +148,8 @@ npp::Cmplx operator*(const double other, const npp::Cmplx &z)
 
 npp::Cmplx npp::Cmplx::operator/(const npp::Cmplx &other) const
 {
+  npp::checkDivision(other);
+
   return Cmplx
   (
     (m_real * other.re() + m_imag * other.im()) / (other.re() * other.re() + other.im() + other.im()),
@@ -157,11 +159,15 @@ npp::Cmplx npp::Cmplx::operator/(const npp::Cmplx &other) const
 
 npp::Cmplx npp::Cmplx::operator/(const double other) const
 {
+  npp::checkDivision(other);
+
   return Cmplx(m_real / other, m_imag / other);
 }
 
 npp::Cmplx operator/(const double other, const npp::Cmplx &z)
 {
+  npp::checkDivision(other);
+
   return npp::Cmplx
   (
     (z.re() * other) / (z.re() * z.re() + z.im() * z.im()),

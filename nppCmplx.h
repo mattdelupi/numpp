@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cmath>
 #include <stdexcept>
+#include "nppMath.h"
 
 namespace npp
 {
@@ -25,6 +26,7 @@ namespace npp
     static Cmplx zero();
     static Cmplx one();
 
+  public:
     double &re();
     const double &re() const;
     double &im();
