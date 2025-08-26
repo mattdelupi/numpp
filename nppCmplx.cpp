@@ -19,6 +19,9 @@ npp::Cmplx npp::Cmplx::cartesian(const double re, const double im)
 
 npp::Cmplx npp::Cmplx::polar(const double r, const double t)
 {
+  if (r < 0)
+    std::invalid_argument("complex number magnitude must be greater than zero");
+
   return Cmplx(r * std::cos(t), r * std::sin(t));
 }
 
