@@ -41,28 +41,22 @@ namespace npp
     const Cmplx &operator+() const;
     Cmplx operator+(const Cmplx &) const;
     Cmplx operator+(const double) const;
-    friend Cmplx operator+(const double, const Cmplx &);
 
     Cmplx operator-() const;
     Cmplx operator-(const Cmplx &) const;
     Cmplx operator-(const double) const;
-    friend Cmplx operator-(const double, const Cmplx &);
 
     Cmplx operator*(const Cmplx &) const;
     Cmplx operator*(const double) const;
-    friend Cmplx operator*(const double, const Cmplx &);
 
     Cmplx operator/(const Cmplx &) const;
     Cmplx operator/(const double) const;
-    friend Cmplx operator/(const double, const Cmplx &);
 
     bool operator==(const Cmplx &) const;
     bool operator==(const double) const;
-    friend bool operator==(const double, const Cmplx &);
 
     bool operator!=(const Cmplx &) const;
     bool operator!=(const double) const;
-    friend bool operator!=(const double, const Cmplx &);
 
     Cmplx conj() const;
 
@@ -77,3 +71,10 @@ namespace npp
     static void printPolar(const Cmplx &);
   };
 }
+
+npp::Cmplx operator+(const double, const npp::Cmplx &);
+npp::Cmplx operator-(const double, const npp::Cmplx &);
+npp::Cmplx operator*(const double, const npp::Cmplx &);
+npp::Cmplx operator/(const double, const npp::Cmplx &);
+bool operator==(const double, const npp::Cmplx &);
+bool operator!=(const double, const npp::Cmplx &);
