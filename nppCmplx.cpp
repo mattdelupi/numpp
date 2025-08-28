@@ -240,6 +240,8 @@ npp::Cmplx operator*=(const double &other, const npp::Cmplx &z)
 
 npp::Cmplx npp::Cmplx::operator/=(const npp::Cmplx &other)
 {
+  npp::checkDivision(other);
+
   *this = *this / other;
 
   return *this;
@@ -247,6 +249,8 @@ npp::Cmplx npp::Cmplx::operator/=(const npp::Cmplx &other)
 
 npp::Cmplx npp::Cmplx::operator/=(const double &other)
 {
+  npp::checkDivision(other);
+
   *this = *this / other;
 
   return *this;
@@ -254,6 +258,8 @@ npp::Cmplx npp::Cmplx::operator/=(const double &other)
 
 npp::Cmplx operator/=(const double &other, const npp::Cmplx &z)
 {
+  npp::checkDivision(z);
+
   npp::Cmplx result = other / z;
 
   return result;
