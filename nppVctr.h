@@ -137,6 +137,11 @@ namespace npp
     template <class UnaryFunc>
     Vctr map(UnaryFunc) const;
 
+    static Vctr range(const T &, const T &);
+    static Vctr range(const T &, const T &, const T &);
+
+    static Vctr linSpace(const T &, const T &, const SizeType &);
+
     bool isColumn() const;
   };
 }
@@ -689,6 +694,47 @@ npp::Vctr<T> npp::Vctr<T>::map(UnaryFunc func) const
   npp::Vctr<T> result(*this);
 
   result.apply(func);
+
+  return result;
+}
+
+template <class T>
+npp::Vctr<T> npp::Vctr<T>::range(const T &first, const T &last)
+{
+  T unit = last >= first ? 1.0 : -1.0;
+
+  npp::Vctr<T>::SizeType N = std::floor(std::abs(last - first)) + 1;
+
+  npp::Vctr<T> result(N);
+
+  for (npp::Vctr<T>::SizeType i = 0; i < N; i++)
+    result[i] = first + unit * i;
+
+  return result;
+}
+
+template <class T>
+npp::Vctr<T> npp::Vctr<T>::range(const T &first, const T &last, const T &step)
+{
+  T unit = last >= first ? 1.0 : -1.0;
+
+  npp::Vctr<T>::SizeType N = std::floor(std::abs(last - first) / std::abs(step)) + 1;
+
+  npp::Vctr<T> result(N);
+
+  for (npp::Vctr<T>::SizeType i = 0; i < N; i++)
+    result[i] = first + unit * std::abs(step) * i;
+
+  return result;
+}
+
+template <class T>
+npp::Vctr<T> npp::Vctr<T>::linSpace(const T &first, const T &last, const npp::Vctr<T>::SizeType &length)
+{
+  npp::Vctr<T> result(length);
+
+  for (npp::Vctr<T>::SizeType i = 0; i < length; i++)
+    result[i] = first + (last - first) * i / (length - 1);
 
   return result;
 }
