@@ -152,8 +152,8 @@ npp::Cmplx npp::Cmplx::operator/(const npp::Cmplx &other) const
 
   return Cmplx
   (
-    (m_real * other.re() + m_imag * other.im()) / (other.re() * other.re() + other.im() + other.im()),
-    (m_imag * other.re() - m_real * other.im()) / (other.re() * other.re() + other.im() + other.im())
+    (m_real * other.re() + m_imag * other.im()) / (other.re() * other.re() + other.im() * other.im()),
+    (m_imag * other.re() - m_real * other.im()) / (other.re() * other.re() + other.im() * other.im())
   );
 }
 
