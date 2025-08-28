@@ -17,7 +17,10 @@ namespace npp
   template <class T>
   class Vctr
   {
-    static_assert(std::is_arithmetic_v<T>, "The npp::Vctr template class requires an arithmetic type like int, float, double, npp::Cmplx, etc.");
+    static_assert(
+      std::is_arithmetic_v<T> || std::is_same_v<T, npp::Cmplx>,
+      "The npp::Vctr template class requires an arithmetic type like int, float, double, npp::Cmplx, etc."
+    );
 
   public:
     using ValueType = T;
