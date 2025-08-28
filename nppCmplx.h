@@ -52,6 +52,18 @@ namespace npp
     Cmplx operator/(const Cmplx &) const;
     Cmplx operator/(const double) const;
 
+    Cmplx operator+=(const Cmplx &);
+    Cmplx operator+=(const double &);
+
+    Cmplx operator-=(const Cmplx &);
+    Cmplx operator-=(const double &);
+
+    Cmplx operator*=(const Cmplx &);
+    Cmplx operator*=(const double &);
+
+    Cmplx operator/=(const Cmplx &);
+    Cmplx operator/=(const double &);
+
     bool operator==(const Cmplx &) const;
     bool operator==(const double) const;
 
@@ -76,5 +88,9 @@ npp::Cmplx operator+(const double, const npp::Cmplx &);
 npp::Cmplx operator-(const double, const npp::Cmplx &);
 npp::Cmplx operator*(const double, const npp::Cmplx &);
 npp::Cmplx operator/(const double, const npp::Cmplx &);
+npp::Cmplx operator+=(const double &, const npp::Cmplx &);
+npp::Cmplx operator-=(const double &, const npp::Cmplx &);
+npp::Cmplx operator*=(const double &, const npp::Cmplx &);
+npp::Cmplx operator/=(const double &, const npp::Cmplx &);
 bool operator==(const double, const npp::Cmplx &);
 bool operator!=(const double, const npp::Cmplx &);

@@ -175,6 +175,90 @@ npp::Cmplx operator/(const double other, const npp::Cmplx &z)
   );
 }
 
+npp::Cmplx npp::Cmplx::operator+=(const npp::Cmplx &other)
+{
+  *this = *this + other;
+
+  return *this;
+}
+
+npp::Cmplx npp::Cmplx::operator+=(const double &other)
+{
+  *this = *this + other;
+
+  return *this;
+}
+
+npp::Cmplx operator+=(const double &other, const npp::Cmplx &z)
+{
+  npp::Cmplx result = other + z;
+
+  return result;
+}
+
+npp::Cmplx npp::Cmplx::operator-=(const npp::Cmplx &other)
+{
+  *this = *this - other;
+
+  return *this;
+}
+
+npp::Cmplx npp::Cmplx::operator-=(const double &other)
+{
+  *this = *this - other;
+
+  return *this;
+}
+
+npp::Cmplx operator-=(const double &other, const npp::Cmplx &z)
+{
+  npp::Cmplx result = other - z;
+
+  return result;
+}
+
+npp::Cmplx npp::Cmplx::operator*=(const npp::Cmplx &other)
+{
+  *this = *this * other;
+
+  return *this;
+}
+
+npp::Cmplx npp::Cmplx::operator*=(const double &other)
+{
+  *this = *this * other;
+
+  return *this;
+}
+
+npp::Cmplx operator*=(const double &other, const npp::Cmplx &z)
+{
+  npp::Cmplx result = other * z;
+
+  return result;
+}
+
+npp::Cmplx npp::Cmplx::operator/=(const npp::Cmplx &other)
+{
+  *this = *this / other;
+
+  return *this;
+}
+
+npp::Cmplx npp::Cmplx::operator/=(const double &other)
+{
+  *this = *this / other;
+
+  return *this;
+}
+
+npp::Cmplx operator/=(const double &other, const npp::Cmplx &z)
+{
+  npp::Cmplx result = other / z;
+
+  return result;
+}
+
 bool npp::Cmplx::operator==(const npp::Cmplx &other) const
 {
   if (m_real != other.re() || m_imag != other.im())
