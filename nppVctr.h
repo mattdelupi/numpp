@@ -103,39 +103,21 @@ namespace npp
     Vctr operator+(const Vctr &) const;
     Vctr operator+(const T &) const;
 
-    template <class U>
-    friend Vctr<U> operator+(const U &, const Vctr<U> &);
-
     Vctr operator-() const;
     Vctr operator-(const Vctr &) const;
     Vctr operator-(const T &) const;
 
-    template <class U>
-    friend Vctr<U> operator-(const U &, const Vctr<U> &);
-
     Vctr operator*(const Vctr &) const;
     Vctr operator*(const T &) const;
-
-    template <class U>
-    friend Vctr<U> operator*(const U &, const Vctr<U> &);
 
     Vctr operator/(const Vctr &) const;
     Vctr operator/(const T &) const;
 
-    template <class U>
-    friend Vctr<U> operator/(const U &, const Vctr<U> &);
-
     bool operator==(const Vctr &) const;
     bool operator==(const T &) const;
 
-    template <class U>
-    friend bool operator==(const U &, const Vctr<U> &);
-
     bool operator!=(const Vctr &) const;
     bool operator!=(const T &) const;
-
-    template <class U>
-    friend bool operator!=(const U &, const Vctr<U> &);
 
     T dot(const Vctr &) const;
 
@@ -158,6 +140,24 @@ namespace npp
     bool isColumn() const;
   };
 }
+
+template <class T>
+npp::Vctr<T> operator+(const T &, const npp::Vctr<T> &);
+
+template <class T>
+npp::Vctr<T> operator-(const T &, const npp::Vctr<T> &);
+
+template <class T>
+npp::Vctr<T> operator*(const T &, const npp::Vctr<T> &);
+
+template <class T>
+npp::Vctr<T> operator/(const T &, const npp::Vctr<T> &);
+
+template <class T>
+bool operator==(const T &, const npp::Vctr<T> &);
+
+template <class T>
+bool operator!=(const T &, const npp::Vctr<T> &);
 
 template <class T>
 npp::Vctr<T>::Vctr() : m_data(), m_isColumn(true) {}
