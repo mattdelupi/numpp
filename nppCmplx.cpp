@@ -323,7 +323,7 @@ void npp::Cmplx::print() const
 {
   std::cout << m_real;
 
-  if (m_imag >= 0.0)
+  if (m_imag >= 0.0 && m_imag != -0.0)
     std::cout << " + i" << m_imag << '\n';
   else
     std::cout << " - i" << -m_imag << '\n';
@@ -331,12 +331,7 @@ void npp::Cmplx::print() const
 
 void npp::Cmplx::print(const npp::Cmplx &z)
 {
-  std::cout << z.re();
-
-  if (z.im() >= 0.0)
-    std::cout << " + i" << z.im() << '\n';
-  else
-    std::cout << " - i" << -z.im() << '\n';
+  z.print();
 }
 
 void npp::Cmplx::printPolar() const
@@ -346,5 +341,5 @@ void npp::Cmplx::printPolar() const
 
 void npp::Cmplx::printPolar(const Cmplx &z)
 {
-  std::cout << z.mag() << '<' << z.arg() << '\n';
+  z.printPolar();
 }
