@@ -124,7 +124,7 @@ npp::Cmplx npp::Cmplx::operator-(const double other) const
 
 npp::Cmplx operator-(const double other, const npp::Cmplx &z)
 {
-  return z - other;
+  return -(z - other);
 }
 
 npp::Cmplx npp::Cmplx::operator*(const npp::Cmplx &other) const
