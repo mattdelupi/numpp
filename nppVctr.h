@@ -141,23 +141,23 @@ namespace npp
   };
 }
 
-template <class T>
-npp::Vctr<T> operator+(const T &, const npp::Vctr<T> &);
+template <class T, class U>
+npp::Vctr<T> operator+(const U &, const npp::Vctr<T> &);
 
-template <class T>
-npp::Vctr<T> operator-(const T &, const npp::Vctr<T> &);
+template <class T, class U>
+npp::Vctr<T> operator-(const U &, const npp::Vctr<T> &);
 
-template <class T>
-npp::Vctr<T> operator*(const T &, const npp::Vctr<T> &);
+template <class T, class U>
+npp::Vctr<T> operator*(const U &, const npp::Vctr<T> &);
 
-template <class T>
-npp::Vctr<T> operator/(const T &, const npp::Vctr<T> &);
+template <class T, class U>
+npp::Vctr<T> operator/(const U &, const npp::Vctr<T> &);
 
-template <class T>
-bool operator==(const T &, const npp::Vctr<T> &);
+template <class T, class U>
+bool operator==(const U &, const npp::Vctr<T> &);
 
-template <class T>
-bool operator!=(const T &, const npp::Vctr<T> &);
+template <class T, class U>
+bool operator!=(const U &, const npp::Vctr<T> &);
 
 template <class T>
 npp::Vctr<T>::Vctr() : m_data(), m_isColumn(true) {}
@@ -458,8 +458,8 @@ template <class T>npp::Vctr<T> npp::Vctr<T>::operator+(const T &other) const
   return result;
 }
 
-template <class T>
-npp::Vctr<T> operator+(const T &other, const npp::Vctr<T> &v)
+template <class T, class U>
+npp::Vctr<T> operator+(const U &other, const npp::Vctr<T> &v)
 {
   npp::Vctr<T> result(v);
 
@@ -497,8 +497,8 @@ template <class T>npp::Vctr<T> npp::Vctr<T>::operator-(const T &other) const
   return result;
 }
 
-template <class T>
-npp::Vctr<T> operator-(const T &other, const npp::Vctr<T> &v)
+template <class T, class U>
+npp::Vctr<T> operator-(const U &other, const npp::Vctr<T> &v)
 {
   npp::Vctr<T> result(v);
 
@@ -527,8 +527,8 @@ template <class T>npp::Vctr<T> npp::Vctr<T>::operator*(const T &other) const
   return result;
 }
 
-template <class T>
-npp::Vctr<T> operator*(const T &other, const npp::Vctr<T> &v)
+template <class T, class U>
+npp::Vctr<T> operator*(const U &other, const npp::Vctr<T> &v)
 {
   npp::Vctr<T> result(v);
 
@@ -557,8 +557,8 @@ npp::Vctr<T> npp::Vctr<T>::operator/(const T &other) const
   return result;
 }
 
-template <class T>
-npp::Vctr<T> operator/(const T &other, const npp::Vctr<T> &v)
+template <class T, class U>
+npp::Vctr<T> operator/(const U &other, const npp::Vctr<T> &v)
 {
   npp::checkDivision(v);
 
@@ -584,8 +584,8 @@ bool npp::Vctr<T>::operator==(const T &other) const
   return std::find(begin(), end(), other) != end();
 }
 
-template <class T>
-bool operator==(const T &other, const npp::Vctr<T> &v)
+template <class T, class U>
+bool operator==(const U &other, const npp::Vctr<T> &v)
 {
   return v == other;
 }
@@ -602,8 +602,8 @@ bool npp::Vctr<T>::operator!=(const T &other) const
   return !(*this == other);
 }
 
-template <class T>
-bool operator!=(const T &other, const npp::Vctr<T> &v)
+template <class T, class U>
+bool operator!=(const U &other, const npp::Vctr<T> &v)
 {
   return v != other;
 }
