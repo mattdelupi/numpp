@@ -168,7 +168,7 @@ template <class T>
 npp::Vctr<T>::Vctr() : m_data(), m_isColumn(true) {}
 
 template <class T>
-npp::Vctr<T>::Vctr(const npp::Vctr<T>::SizeType s) : m_data(s), m_isColumn(true) {};
+npp::Vctr<T>::Vctr(const npp::Vctr<T>::SizeType s) : m_data(s), m_isColumn(true) {}
 
 template <class T>
 npp::Vctr<T>::Vctr(const npp::Vctr<T>::SizeType s, const T &value) : m_data(s, value), m_isColumn(true) {}
