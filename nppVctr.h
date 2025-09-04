@@ -39,7 +39,7 @@ namespace npp
     Vctr(std::initializer_list<T>);
     Vctr(const Vctr &);
     Vctr(Vctr &&) noexcept;
-    ~Vctr();
+    ~Vctr() noexcept;
 
     template <class Iter>
     Vctr(Iter, Iter);
@@ -187,7 +187,7 @@ template <class Iter>
 npp::Vctr<T>::Vctr(Iter first, Iter last) : m_data(first, last), m_isColumn(true) {}
 
 template <class T>
-npp::Vctr<T>::~Vctr() = default;
+npp::Vctr<T>::~Vctr() noexcept = default;
 
 template <class T>
 void npp::Vctr<T>::checkBounds(const npp::Vctr<T>::SizeType i) const
