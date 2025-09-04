@@ -4,3 +4,4 @@ main.cpp
 main
 *.o
 **/*.o
+notes.txt
