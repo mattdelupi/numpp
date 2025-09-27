@@ -20,7 +20,7 @@ namespace npp
   class Mtrx
   {
     static_assert(
-      std::is_arithmetic_v<_T> || std::is_same_v<_T, npp::Cmplx> || std::is_same_v<_T, npp::Vctr>,
+      std::is_arithmetic_v<_T> || std::is_same_v<_T, npp::Cmplx>,
       "The npp::Mtrx template class requires an arithmetic type like int, float, double, npp::Cmplx, etc."
     );
 
@@ -37,7 +37,7 @@ namespace npp
       SizeType m_cols;
 
     public:
-      RowProxy(const _T *, const SizeType);
+      RowProxy(_T *, const SizeType);
       _T &operator[](const SizeType) noexcept;
       const _T &operator[](const SizeType) const noexcept;
     };
@@ -217,7 +217,7 @@ template <class _T>
 npp::Mtrx<_T>::~Mtrx() noexcept = default;
 
 template <class _T>
-npp::Mtrx<_T>::SizeType npp::Mtrx<_T>::index(const npp::Mtrx<_T>::SizeType row, const npp::Mtrx<_T>::SizeType col) const noexcept
+typename npp::Mtrx<_T>::SizeType npp::Mtrx<_T>::index(const npp::Mtrx<_T>::SizeType row, const npp::Mtrx<_T>::SizeType col) const noexcept
 {
   return col + row * cols();
 }
@@ -307,7 +307,7 @@ const _T &npp::Mtrx<_T>::at(const npp::Mtrx<_T>::SizeType i, const npp::Mtrx<_T>
 }
 
 template <class _T>
-npp::Mtrx<_T>::RowProxy::RowProxy(const _T *rowData, const npp::Mtrx<_T>::SizeType cols)
+npp::Mtrx<_T>::RowProxy::RowProxy(_T *rowData, const npp::Mtrx<_T>::SizeType cols)
 : m_rowData(rowData), m_cols(cols) {}
 
 template <class _T>
@@ -323,7 +323,7 @@ const _T &npp::Mtrx<_T>::RowProxy::operator[](const npp::Mtrx<_T>::SizeType col)
 }
 
 template <class _T>
-npp::Mtrx<_T>::RowProxy npp::Mtrx<_T>::operator[](const npp::Mtrx<_T>::SizeType row) noexcept
+typename npp::Mtrx<_T>::RowProxy npp::Mtrx<_T>::operator[](const npp::Mtrx<_T>::SizeType row) noexcept
 {
   return RowProxy(&m_data[index(row, 0)], m_cols);
 }
@@ -339,19 +339,19 @@ const _T &npp::Mtrx<_T>::ConstRowProxy::operator[](const npp::Mtrx<_T>::SizeType
 }
 
 template <class _T>
-npp::Mtrx<_T>::ConstRowProxy npp::Mtrx<_T>::operator[](const npp::Mtrx<_T>::SizeType row) const noexcept
+typename npp::Mtrx<_T>::ConstRowProxy npp::Mtrx<_T>::operator[](const npp::Mtrx<_T>::SizeType row) const noexcept
 {
   return ConstRowProxy(&m_data[index(row, 0)], m_cols);
 }
 
 template <class _T>
-npp::Mtrx<_T>::SizeType npp::Mtrx<_T>::rows() const noexcept
+typename npp::Mtrx<_T>::SizeType npp::Mtrx<_T>::rows() const noexcept
 {
   return m_rows;
 }
 
 template <class _T>
-npp::Mtrx<_T>::SizeType npp::Mtrx<_T>::cols() const noexcept
+typename npp::Mtrx<_T>::SizeType npp::Mtrx<_T>::cols() const noexcept
 {
   return m_cols;
 }
@@ -363,7 +363,7 @@ std::vector<typename npp::Mtrx<_T>::SizeType> npp::Mtrx<_T>::dims() const noexce
 }
 
 template <class _T>
-npp::Mtrx<_T>::SizeType npp::Mtrx<_T>::elements() const noexcept
+typename npp::Mtrx<_T>::SizeType npp::Mtrx<_T>::elements() const noexcept
 {
   return m_rows * m_cols;
 }
@@ -669,6 +669,8 @@ template <>
 npp::Mtrx<npp::Cmplx> npp::Mtrx<npp::Cmplx>::H() const
 {
   npp::Mtrx<npp::Cmplx> result(this->T()); // AGGIUNGERE conj()
+
+  return result;
 }
 
 template <class _T>
@@ -689,7 +691,7 @@ npp::Mtrx<_T> npp::Mtrx<_T>::dot(const npp::Mtrx<_T> &other) const
     {
       result[i][j] = 0;
       for (SizeType k = 0; k < cols(); k++)
-        result[i][j] += m_data[index(i, k)] * other[k, j];
+        result[i][j] += m_data[index(i, k)] * other[k][j];
     }
 
   return result;
@@ -727,7 +729,7 @@ npp::Mtrx<_T> npp::Mtrx<_T>::minor(const npp::Mtrx<_T>::SizeType i, const npp::M
 }
 
 template <class _T>
-npp::Mtrx<_T>::ValueType npp::Mtrx<_T>::det() const
+typename npp::Mtrx<_T>::ValueType npp::Mtrx<_T>::det() const
 {
   checkSquareMatrix(*this);
 
@@ -753,7 +755,7 @@ npp::Mtrx<_T>::ValueType npp::Mtrx<_T>::det() const
 }
 
 template <class _T>
-npp::Mtrx<_T>::ValueType npp::Mtrx<_T>::det(const npp::Mtrx<_T> &m)
+typename npp::Mtrx<_T>::ValueType npp::Mtrx<_T>::det(const npp::Mtrx<_T> &m)
 {
   return m.det();
 }
@@ -791,13 +793,13 @@ npp::Mtrx<_T> npp::Mtrx<_T>::rInv(const npp::Mtrx<_T> &other) const
 }
 
 template <class _T>
-npp::Mtrx<_T>::ValueType npp::Mtrx<_T>::sum() const
+typename npp::Mtrx<_T>::ValueType npp::Mtrx<_T>::sum() const
 {
   return std::accumulate(begin(), end(), _T{});
 }
 
 template <class _T>
-npp::Mtrx<_T>::ValueType npp::Mtrx<_T>::min() const
+typename npp::Mtrx<_T>::ValueType npp::Mtrx<_T>::min() const
 {
   if (isEmpty())
     throw std::runtime_error("min() called on empty matrix");
@@ -806,7 +808,7 @@ npp::Mtrx<_T>::ValueType npp::Mtrx<_T>::min() const
 }
 
 template <class _T>
-npp::Mtrx<_T>::ValueType npp::Mtrx<_T>::max() const
+typename npp::Mtrx<_T>::ValueType npp::Mtrx<_T>::max() const
 {
   if (isEmpty())
     throw std::runtime_error("max() called on empty matrix");
@@ -841,8 +843,9 @@ void npp::Mtrx<_T>::print() const
   {
     std::cout << '\n';
     for (npp::Mtrx<_T>::SizeType j = 0; j < cols(); j++)
-      std::cout << m_data[index(i, j)] << ",\t"
+      std::cout << m_data[index(i, j)] << '\t';
   }
+  std::cout << '\n';
 }
 
 template <class _T>
