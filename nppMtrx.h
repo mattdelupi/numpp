@@ -439,7 +439,7 @@ npp::Mtrx<_T> &npp::Mtrx<_T>::operator+=(const npp::Mtrx<_T> &other)
 {
   checkSizeCompatibility(other);
 
-  std::transform(begin(), end(), other.begin(), other.end(), std::plus<_T>{});
+  std::transform(begin(), end(), other.begin(), begin(), std::plus<_T>{});
 
   return *this;
 }
@@ -447,8 +447,6 @@ npp::Mtrx<_T> &npp::Mtrx<_T>::operator+=(const npp::Mtrx<_T> &other)
 template <class _T>
 npp::Mtrx<_T> &npp::Mtrx<_T>::operator+=(const _T &other)
 {
-  checkSizeCompatibility(other);
-
   for (auto &element : m_data)
     element += other;
 
@@ -460,7 +458,7 @@ npp::Mtrx<_T> &npp::Mtrx<_T>::operator-=(const npp::Mtrx<_T> &other)
 {
   checkSizeCompatibility(other);
 
-  std::transform(begin(), end(), other.begin(), other.end(), std::minus<_T>{});
+  std::transform(begin(), end(), other.begin(), begin(), std::minus<_T>{});
 
   return *this;
 }
@@ -468,8 +466,6 @@ npp::Mtrx<_T> &npp::Mtrx<_T>::operator-=(const npp::Mtrx<_T> &other)
 template <class _T>
 npp::Mtrx<_T> &npp::Mtrx<_T>::operator-=(const _T &other)
 {
-  checkSizeCompatibility(other);
-
   for (auto &element : m_data)
     element -= other;
 
@@ -481,7 +477,7 @@ npp::Mtrx<_T> &npp::Mtrx<_T>::operator*=(const npp::Mtrx<_T> &other)
 {
   checkSizeCompatibility(other);
 
-  std::transform(begin(), end(), other.begin(), other.end(), std::multiplies<_T>{});
+  std::transform(begin(), end(), other.begin(), begin(), std::multiplies<_T>{});
 
   return *this;
 }
@@ -489,8 +485,6 @@ npp::Mtrx<_T> &npp::Mtrx<_T>::operator*=(const npp::Mtrx<_T> &other)
 template <class _T>
 npp::Mtrx<_T> &npp::Mtrx<_T>::operator*=(const _T &other)
 {
-  checkSizeCompatibility(other);
-
   for (auto &element : m_data)
     element *= other;
 
@@ -502,7 +496,7 @@ npp::Mtrx<_T> &npp::Mtrx<_T>::operator/=(const npp::Mtrx<_T> &other)
 {
   checkSizeCompatibility(other);
 
-  std::transform(begin(), end(), other.begin(), other.end(), std::divides<_T>{});
+  std::transform(begin(), end(), other.begin(), begin(), std::divides<_T>{});
 
   return *this;
 }
@@ -510,8 +504,6 @@ npp::Mtrx<_T> &npp::Mtrx<_T>::operator/=(const npp::Mtrx<_T> &other)
 template <class _T>
 npp::Mtrx<_T> &npp::Mtrx<_T>::operator/=(const _T &other)
 {
-  checkSizeCompatibility(other);
-
   for (auto &element : m_data)
     element /= other;
 
