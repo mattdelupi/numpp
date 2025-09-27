@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <iomanip>
 #include <type_traits>
 #include <initializer_list>
 #include <stdexcept>
@@ -124,6 +125,9 @@ namespace npp
     Mtrx &operator/=(const Mtrx &);
     Mtrx &operator/=(const _T &);
 
+    Mtrx &operator^=(const Mtrx &);
+    Mtrx &operator^=(const _T &);
+
     const Mtrx &operator+() const;
     Mtrx operator+(const Mtrx &) const;
     Mtrx operator+(const _T &) const;
@@ -137,6 +141,9 @@ namespace npp
 
     Mtrx operator/(const Mtrx &) const;
     Mtrx operator/(const _T &) const;
+
+    Mtrx operator^(const Mtrx &) const;
+    Mtrx operator^(const _T &) const;
 
     bool operator==(const Mtrx &) const;
     bool operator==(const _T &) const;
@@ -511,6 +518,24 @@ npp::Mtrx<_T> &npp::Mtrx<_T>::operator/=(const _T &other)
 }
 
 template <class _T>
+npp::Mtrx<_T> &npp::Mtrx<_T>::operator^=(const npp::Mtrx<_T> &other)
+{
+  checkSizeCompatibility(other);
+
+  std::transform(begin(), end(), other.begin(), begin(), [](_T x, _T y){return std::pow(x, y);});
+
+  return *this;
+}
+
+template <class _T>
+npp::Mtrx<_T> &npp::Mtrx<_T>::operator^=(const _T &other)
+{
+  apply([other](_T x){return std::pow(x, other);});
+
+  return *this;
+}
+
+template <class _T>
 const npp::Mtrx<_T> &npp::Mtrx<_T>::operator+() const
 {
   return *this;
@@ -602,6 +627,26 @@ npp::Mtrx<_T> npp::Mtrx<_T>::operator/(const _T &other) const
   npp::Mtrx<_T> result(*this);
 
   result /= other;
+
+  return result;
+}
+
+template <class _T>
+npp::Mtrx<_T> npp::Mtrx<_T>::operator^(const npp::Mtrx<_T> &other) const
+{
+  npp::Mtrx<_T> result(*this);
+
+  result ^= other;
+
+  return result;
+}
+
+template <class _T>
+npp::Mtrx<_T> npp::Mtrx<_T>::operator^(const _T &other) const
+{
+  npp::Mtrx<_T> result(*this);
+
+  result ^= other;
 
   return result;
 }
@@ -835,7 +880,7 @@ void npp::Mtrx<_T>::print() const
   {
     std::cout << '\n';
     for (npp::Mtrx<_T>::SizeType j = 0; j < cols(); j++)
-      std::cout << m_data[index(i, j)] << '\t';
+      std::cout << std::left << std::setw(16) << m_data[index(i, j)];
   }
   std::cout << '\n';
 }
