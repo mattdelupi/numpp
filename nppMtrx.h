@@ -855,6 +855,8 @@ npp::Mtrx<_T> npp::Mtrx<_T>::zeros(const npp::Mtrx<_T>::SizeType rows, const npp
 
   for (auto &element : result)
     element = 0.0;
+
+  return result;
 }
 
 template <class _T>
@@ -864,6 +866,8 @@ npp::Mtrx<_T> npp::Mtrx<_T>::ones(const npp::Mtrx<_T>::SizeType rows, const npp:
 
   for (auto &element : result)
     element = 1.0;
+
+  return result;
 }
 
 template <class _T>
