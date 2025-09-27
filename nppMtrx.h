@@ -193,6 +193,21 @@ namespace npp
 }
 
 template <class _T>
+npp::Mtrx<_T> operator+(const _T &, const npp::Mtrx<_T> &);
+
+template <class _T>
+npp::Mtrx<_T> operator-(const _T &, const npp::Mtrx<_T> &);
+
+template <class _T>
+npp::Mtrx<_T> operator*(const _T &, const npp::Mtrx<_T> &);
+
+template <class _T>
+npp::Mtrx<_T> operator/(const _T &, const npp::Mtrx<_T> &);
+
+template <class _T>
+npp::Mtrx<_T> operator^(const _T &, const npp::Mtrx<_T> &);
+
+template <class _T>
 npp::Mtrx<_T>::Mtrx() : m_data(), m_rows(0), m_cols(0) {}
 
 template <class _T>
@@ -562,6 +577,12 @@ npp::Mtrx<_T> npp::Mtrx<_T>::operator+(const _T &other) const
 }
 
 template <class _T>
+npp::Mtrx<_T> operator+(const _T &x, const npp::Mtrx<_T> &m)
+{
+  return m + x;
+}
+
+template <class _T>
 npp::Mtrx<_T> npp::Mtrx<_T>::operator-() const
 {
   npp::Mtrx<_T> result(rows(), cols());
@@ -592,6 +613,12 @@ npp::Mtrx<_T> npp::Mtrx<_T>::operator-(const _T &other) const
 }
 
 template <class _T>
+npp::Mtrx<_T> operator-(const _T &x, const npp::Mtrx<_T> &m)
+{
+  return -m + x;
+}
+
+template <class _T>
 npp::Mtrx<_T> npp::Mtrx<_T>::operator*(const npp::Mtrx<_T> &other) const
 {
   npp::Mtrx<_T> result(*this);
@@ -609,6 +636,12 @@ npp::Mtrx<_T> npp::Mtrx<_T>::operator*(const _T &other) const
   result *= other;
 
   return result;
+}
+
+template <class _T>
+npp::Mtrx<_T> operator*(const _T &x, const npp::Mtrx<_T> &m)
+{
+  return m * x;
 }
 
 template <class _T>
@@ -632,6 +665,17 @@ npp::Mtrx<_T> npp::Mtrx<_T>::operator/(const _T &other) const
 }
 
 template <class _T>
+npp::Mtrx<_T> operator/(const _T &x, const npp::Mtrx<_T> &m)
+{
+  npp::Mtrx<_T> result(m);
+
+  for (auto &element : result)
+    element = x / element;
+
+  return result;
+}
+
+template <class _T>
 npp::Mtrx<_T> npp::Mtrx<_T>::operator^(const npp::Mtrx<_T> &other) const
 {
   npp::Mtrx<_T> result(*this);
@@ -647,6 +691,17 @@ npp::Mtrx<_T> npp::Mtrx<_T>::operator^(const _T &other) const
   npp::Mtrx<_T> result(*this);
 
   result ^= other;
+
+  return result;
+}
+
+template <class _T>
+npp::Mtrx<_T> operator^(const _T &x, const npp::Mtrx<_T> &m)
+{
+  npp::Mtrx<_T> result(m);
+
+  for (auto &element : result)
+    element = std::pow(x, element);
 
   return result;
 }
@@ -880,7 +935,7 @@ void npp::Mtrx<_T>::print() const
   {
     std::cout << '\n';
     for (npp::Mtrx<_T>::SizeType j = 0; j < cols(); j++)
-      std::cout << std::left << std::setw(16) << m_data[index(i, j)];
+      std::cout << std::left << std::setw(10) << m_data[index(i, j)];
   }
   std::cout << '\n';
 }
