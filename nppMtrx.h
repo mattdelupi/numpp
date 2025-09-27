@@ -175,6 +175,9 @@ namespace npp
     template <class UnaryFunc>
     Mtrx map(UnaryFunc) const;
 
+    void print() const;
+    void print(const std::string &) const;
+
     static Mtrx zeros(const SizeType, const SizeType);
     static Mtrx ones(const SizeType, const SizeType);
     static Mtrx diag(const SizeType, const ValueType &);
@@ -829,6 +832,25 @@ npp::Mtrx<_T> npp::Mtrx<_T>::map(UnaryFunc func) const
   result.apply(func);
 
   return result;
+}
+
+template <class _T>
+void npp::Mtrx<_T>::print() const
+{
+  for (npp::Mtrx<_T>::SizeType i = 0; i < rows(); i++)
+  {
+    std::cout << '\n';
+    for (npp::Mtrx<_T>::SizeType j = 0; j < cols(); j++)
+      std::cout << m_data[index(i, j)] << ",\t"
+  }
+}
+
+template <class _T>
+void npp::Mtrx<_T>::print(const std::string &name) const
+{
+  std::cout << '\n' << name << " =";
+
+  print();
 }
 
 template <class _T>
