@@ -124,6 +124,12 @@ npp::Mtrx<_T>::RowProxy::RowProxy(_T *rowData, const npp::Mtrx<_T>::SizeType col
 : m_rowData(rowData), m_cols(cols) {}
 
 template <class _T>
+npp::Mtrx<_T>::RowProxy::operator _T &()
+{
+  return *m_rowData;
+}
+
+template <class _T>
 _T &npp::Mtrx<_T>::RowProxy::operator[](const npp::Mtrx<_T>::SizeType col) noexcept
 {
   return m_rowData[col];
@@ -144,6 +150,12 @@ typename npp::Mtrx<_T>::RowProxy npp::Mtrx<_T>::operator[](const npp::Mtrx<_T>::
 template <class _T>
 npp::Mtrx<_T>::ConstRowProxy::ConstRowProxy(const _T *rowData, const npp::Mtrx<_T>::SizeType cols)
 : m_rowData(rowData), m_cols(cols) {}
+
+template <class _T>
+npp::Mtrx<_T>::ConstRowProxy::operator const _T &() const
+{
+  return *m_rowData;
+}
 
 template <class _T>
 const _T &npp::Mtrx<_T>::ConstRowProxy::operator[](const npp::Mtrx<_T>::SizeType col) const noexcept

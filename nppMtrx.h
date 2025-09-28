@@ -39,6 +39,7 @@ namespace npp
 
     public:
       RowProxy(_T *, const SizeType);
+      operator _T &();
       _T &operator[](const SizeType) noexcept;
       const _T &operator[](const SizeType) const noexcept;
     };
@@ -51,6 +52,7 @@ namespace npp
 
     public:
       ConstRowProxy(const _T *, const SizeType);
+      operator const _T &() const;
       const _T &operator[](const SizeType) const noexcept;
     };
 
