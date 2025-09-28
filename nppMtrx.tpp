@@ -740,6 +740,17 @@ void npp::Mtrx<_T>::print(const std::string &name) const
 }
 
 template <class _T>
+npp::Mtrx<_T> npp::Mtrx<_T>::vectorize() const
+{
+  npp::Mtrx<_T> result(elements(), 1);
+
+  for (npp::Mtrx<_T>::SizeType i = 0; i < elements(); i++)
+    *(result.begin() + i) = *(begin() + i);
+
+  return result;
+}
+
+template <class _T>
 npp::Mtrx<_T> npp::Mtrx<_T>::zeros(const npp::Mtrx<_T>::SizeType rows, const npp::Mtrx<_T>::SizeType cols)
 {
   npp::Mtrx<_T> result(rows, cols);

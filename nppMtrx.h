@@ -182,6 +182,8 @@ namespace npp
     void print() const;
     void print(const std::string &) const;
 
+    Mtrx vectorize() const;
+
     static Mtrx zeros(const SizeType, const SizeType);
     static Mtrx ones(const SizeType, const SizeType);
     static Mtrx diag(const SizeType, const ValueType &);
