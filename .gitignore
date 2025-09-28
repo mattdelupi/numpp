@@ -5,3 +5,5 @@ main
 *.o
 **/*.o
 notes.txt
+*.test
+**/*.test
