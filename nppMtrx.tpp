@@ -773,12 +773,17 @@ npp::Mtrx<_T> npp::Mtrx<_T>::diag(const npp::Mtrx<_T>::SizeType dim, const npp::
 }
 
 template <class _T>
-npp::Mtrx<_T> npp::Mtrx<_T>::diag(const npp::Vctr<_T> &values)
+npp::Mtrx<_T> npp::Mtrx<_T>::diag(const npp::Mtrx<_T> &values)
 {
-  npp::Mtrx<_T> result(values.size(), result.size());
+  npp::Mtrx<_T> result(values.elements(), values.elements());
 
-  for (npp::Mtrx<_T>::SizeType k = 0; k < values.size(); k++)
-    result[k][k] = values[k];
+  std::vector<_T> temp(values.elements());
+
+  for (npp::Mtrx<_T>::SizeType i = 0; i < values.elements(); i++)
+    temp[i] = *(values.begin() + i);
+
+  for (npp::Mtrx<_T>::SizeType k = 0; k < values.elements(); k++)
+    result[k][k] = temp[k];
 
   return result;
 }

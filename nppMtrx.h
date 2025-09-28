@@ -54,7 +54,7 @@ namespace npp
       const _T &operator[](const SizeType) const noexcept;
     };
 
-  private:
+  protected:
     std::vector<_T> m_data;
     SizeType m_rows, m_cols;
 
@@ -67,7 +67,7 @@ namespace npp
     Mtrx(Mtrx &&) noexcept;
     ~Mtrx() noexcept;
 
-  private:
+  protected:
     SizeType index(const SizeType, const SizeType) const noexcept;
 
     void checkRowBounds(const SizeType) const;
@@ -151,9 +151,6 @@ namespace npp
     bool operator!=(const Mtrx &) const;
     bool operator!=(const _T &) const;
 
-    Vctr<_T> getRow(const SizeType) const;
-    Vctr<_T> getCol(const SizeType) const;
-
     Mtrx T() const;
     Mtrx t() const;
     Mtrx H() const;
@@ -188,7 +185,7 @@ namespace npp
     static Mtrx zeros(const SizeType, const SizeType);
     static Mtrx ones(const SizeType, const SizeType);
     static Mtrx diag(const SizeType, const ValueType &);
-    static Mtrx diag(const Vctr<_T> &);
+    static Mtrx diag(const Mtrx &);
   };
 }
 
