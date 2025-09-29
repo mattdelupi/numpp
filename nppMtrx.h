@@ -191,6 +191,18 @@ namespace npp
     static Mtrx diag(const SizeType, const ValueType &);
     static Mtrx diag(const Mtrx &);
   };
+
+  using MtrxD = Mtrx<double>;
+  using MtrxF = Mtrx<float>;
+  using MtrxC = Mtrx<Cmplx>;
+  using MtrxI = Mtrx<int>;
+  using MtrxL = Mtrx<long>;
+  using MtrxLL = Mtrx<long long>;
+  using MtrxU = Mtrx<unsigned>;
+  using MtrxB = Mtrx<bool>;
+  using MtrxS = Mtrx<std::string>;
+  using MtrxCh = Mtrx<char>;
+
 }
 
 template <class _T>
