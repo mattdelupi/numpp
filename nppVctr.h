@@ -28,6 +28,17 @@ namespace npp
     _T &operator[](const SizeType);
     const _T &operator[](const SizeType) const;
   };
+
+  using VctrD = Vctr<double>;
+  using VctrF = Vctr<float>;
+  using VctrC = Vctr<Cmplx>;
+  using VctrI = Vctr<int>;
+  using VctrL = Vctr<long>;
+  using VctrLL = Vctr<long long>;
+  using VctrU = Vctr<unsigned>;
+  using VctrB = Vctr<bool>;
+  using VctrS = Vctr<std::string>;
+  using VctrCh = Vctr<char>;
 }
 
 #include "nppVctr.tpp"
