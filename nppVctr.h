@@ -27,6 +27,10 @@ namespace npp
   public:
     _T &operator[](const SizeType);
     const _T &operator[](const SizeType) const;
+
+    static Vctr range(const _T &, const _T &);
+    static Vctr range(const _T &, const _T &, const _T &);
+    static Vctr linSpace(const _T &, const _T &, const SizeType &);
   };
 
   using VctrD = Vctr<double>;
