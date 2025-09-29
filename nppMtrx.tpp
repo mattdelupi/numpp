@@ -805,3 +805,28 @@ npp::Mtrx<_T> npp::Mtrx<_T>::diag(const npp::Mtrx<_T> &values)
 
   return result;
 }
+
+template <class _T>
+void npp::Mtrx<_T>::writeCSV(const std::string &filename) const
+{
+  std::ofstream file(filename);
+
+  for (npp::Mtrx<_T>::SizeType i = 0; i < rows(); i++)
+  {
+    for (npp::Mtrx<_T>::SizeType j = 0; j < cols(); j++)
+    {
+      file << m_data[index(i, j)];
+      
+      if (j < cols() - 1)
+        file << ',';
+    }
+
+    file << '\n';
+  }
+}
+
+template <class _T>
+void npp::Mtrx<_T>::writeCSV(const npp::Mtrx<_T> &mat, const std::string &filename)
+{
+  mat.writeCSV(filename);
+}

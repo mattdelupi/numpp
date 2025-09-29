@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <functional>
 #include <numeric>
+#include <fstream>
 #include "nppMath.h"
 #include "nppCmplx.h"
 #include "nppVctr.h"
@@ -190,6 +191,9 @@ namespace npp
     static Mtrx ones(const SizeType, const SizeType);
     static Mtrx diag(const SizeType, const ValueType &);
     static Mtrx diag(const Mtrx &);
+
+    void writeCSV(const std::string &) const;
+    static void writeCSV(const Mtrx &, const std::string &);
   };
 
   using MtrxD = Mtrx<double>;
