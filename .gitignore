@@ -7,3 +7,4 @@ main
 notes.txt
 *.test
 **/*.test
+exported/*
